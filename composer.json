@@ -1,0 +1,57 @@
+{
+    "name": "amunyua/coop",
+    "description": "A laravel package for cooperative bank of kenya API wrapper",
+    "keywords": [
+        "amunyua",
+        "coop",
+        "co-op",
+        "Cooperative Bank"
+    ],
+    "homepage": "https://github.com/amunyua/coop",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Alex Munyua",
+            "email": "alexmunyua10@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0",
+        "symfony/dotenv": "^5.1"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amunyua\\Coop\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Amunyua\\Coop\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Amunyua\\Coop\\CoopServiceProvider"
+            ],
+            "aliases": {
+                "Coop": "Amunyua\\Coop\\CoopFacade"
+            }
+        }
+    }
+}

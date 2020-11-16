@@ -3,3 +3,6 @@ composer.lock
 docs
 vendor
 coverage
+.env
+.phpunit.*
+composer.phar

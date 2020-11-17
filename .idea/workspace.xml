@@ -4,11 +4,7 @@
     <list default="true" id="26d4988a-0993-42c0-877a-3c03d47d1b25" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.phpunit.result.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.phpunit.result.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Coop.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Coop.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/ExampleTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/ExampleTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +143,7 @@
       <workItem from="1605249095816" duration="14040000" />
       <workItem from="1605505265348" duration="1276000" />
       <workItem from="1605523051356" duration="14000" />
-      <workItem from="1605533467932" duration="3856000" />
+      <workItem from="1605533467932" duration="10316000" />
     </task>
     <servers />
   </component>
@@ -159,5 +155,13 @@
       <screen x="40" y="27" width="1326" height="741" />
     </state>
     <state x="418" y="199" width="559" height="403" key="#com.intellij.fileTypes.FileTypeChooser/40.27.1326.741@40.27.1326.741" timestamp="1605334596878" />
+    <state x="511" y="116" width="374" height="569" key="#com.intellij.ide.util.MemberChooser" timestamp="1605591065628">
+      <screen x="40" y="27" width="1326" height="741" />
+    </state>
+    <state x="511" y="116" width="374" height="569" key="#com.intellij.ide.util.MemberChooser/40.27.1326.741@40.27.1326.741" timestamp="1605591065628" />
+    <state x="436" y="155" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605550587363">
+      <screen x="40" y="27" width="1326" height="741" />
+    </state>
+    <state x="436" y="155" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/40.27.1326.741@40.27.1326.741" timestamp="1605550587363" />
   </component>
 </project>

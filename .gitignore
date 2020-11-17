@@ -6,3 +6,4 @@ coverage
 .env
 .phpunit.*
 composer.phar
+.idea

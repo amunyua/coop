@@ -2,9 +2,14 @@
 
 namespace Amunyua\Coop;
 
+use Carbon\Carbon;
 use Ixudra\Curl\Facades\Curl;
 use Symfony\Component\Dotenv\Dotenv;
 
+/**
+ * Class Coop
+ * @package Amunyua\Coop
+ */
 class Coop
 {
     public static function env($env_param){
@@ -12,13 +17,17 @@ class Coop
         $dotenv = new Dotenv();
 
 //        $dotenv->load('../.env');
-        $dotenv->load('../.env');
+        $dotenv->load('.env');
+//        $dotenv->stor('../.env');
 
         $env = getenv($env_param);
 
         return $env;
     }
 
+    /**
+     * @return mixed
+     */
     public static function generateLiveToken(){
 
         try {
@@ -66,7 +75,8 @@ class Coop
     public static function generateSandBoxToken(){
 
         try {
-            $consumer_key = env("C_CONSUMER_KEY");
+            $consumer_key = self::env("C_CONSUMER_KEY");
+//            $consumer_key = env("C_CONSUMER_KEY");
             $consumer_secret = env("C_CONSUMER_SECRET");
 //            $consumer_key = 'Ek4deBXb4TpGxXjmtSBBggm9Rwka';
 //            $consumer_secret ="0QjSMnlHBfCgBoXrsw0uh1Fg3fUa";
@@ -74,6 +84,7 @@ class Coop
             $consumer_key = self::env("C_CONSUMER_KEY");
             $consumer_secret = self::env("C_CONSUMER_SECRET");
         }
+        dd($consumer_key);
 
         if(!isset($consumer_key)||!isset($consumer_secret)){
             die("please declare the consumer key and consumer secret as defined in the documentation");
@@ -107,49 +118,82 @@ class Coop
         return $token;
     }
 
-    public static function getAccountBalance($accountNumber = '12345678912345'){
-//        print 'here';
-        $requestPayload='{
-                    "MessageReference": "40ca18c6765086089a1",
-                  "AccountNumber": "12345678912345"
-            } ';
 
-        $url = 'https://developer.co-opbank.co.ke:8243/Enquiry/AccountBalance/1.0.0/Account';
+    /**
+     * @param string $accountNumber
+     * @return array|mixed|\stdClass
+     */
+    public static function getAccountBalance($accountNumber = '36001873027'){
+        //set the endpoint url
+        $url = 'https://developer.co-opbank.co.ke:8243/Enquiry/AccountBalance/1.0.0';
+        //generate api access token
         $token = self::generateSandBoxToken();
         $headers = array('Content-Type: application/json',"Authorization: Bearer {$token}");
-//        print $token;
 
-      /*  $process = curl_init();
-
-        curl_setopt($process, CURLOPT_URL, $url);
-
-        curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
-
-        curl_setopt($process, CURLOPT_POSTFIELDS, $requestPayload);
-
-        curl_setopt($process, CURLOPT_CUSTOMREQUEST, "POST");
-
-        curl_setopt($process, CURLOPT_TIMEOUT, 30);
-
-        curl_setopt($process, CURLOPT_SSL_VERIFYPEER, false);
-
-        curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
-
-        $response = curl_exec($process);
-
-        print_r($response);die;
-//        curl_close($process);
-
-        return json_decode($response);*/
-
-        $r = Curl::to($url)
+        return Curl::to($url)
             ->withBearer($token)
-            ->asJson(true)
+            ->withContentType('application/json')
             ->withData([
-                'AccountNumber' => $accountNumber
+                'AccountNumber' => $accountNumber,
+                "MessageReference" => '40ca18c6765086089a1'
             ])
+            ->asJson(true)
             ->returnResponseObject()
             ->post();
-        return $r;
     }
+
+    /**
+     * @param string $accountNumber
+     * @param int $numberOfTransactions
+     * @return array|mixed|\stdClass
+     */
+    public static function getAccountTransactions($accountNumber = '36001873003', $numberOfTransactions = 3){
+        $url = 'https://developer.co-opbank.co.ke:8243/Enquiry/AccountTransactions/1.0.0';
+        //generate api access token
+        $token = self::generateSandBoxToken();
+        $headers = array('Content-Type: application/json',"Authorization: Bearer {$token}");
+
+        $results = Curl::to($url)
+            ->withBearer($token)
+            ->withContentType('application/json')
+            ->withData([
+                'AccountNumber' => $accountNumber,
+                "MessageReference" => '40ca18c6765086089a1',
+                "NoOfTransactions" => $numberOfTransactions
+            ])
+            ->asJson(true)
+            ->returnResponseObject()
+            ->post();
+
+        return $results;
+    }
+
+    /**
+     * @param $startDate
+     * @param $endDate
+     * @param string $accountNumber
+     * @return array|mixed|\stdClass
+     */
+    public static function getFullAccountStatement($startDate, $endDate, $accountNumber = '36001873003'){
+        $url = 'https://developer.co-opbank.co.ke:8243/Enquiry/FullStatement/Account/1.0.0';
+        //generate api access token
+        $token = self::generateSandBoxToken();
+        $headers = array('Content-Type: application/json',"Authorization: Bearer {$token}");
+
+        $results = Curl::to($url)
+            ->withBearer($token)
+            ->withContentType('application/json')
+            ->withData([
+                'AccountNumber' => $accountNumber,
+                "MessageReference" => '40ca18c6765086089a1',
+                "StartDate" => Carbon::parse($startDate)->format('Y-m-d'),
+                "EndDate" => Carbon::parse($endDate)->format('Y-m-d'),
+            ])
+            ->asJson(true)
+            ->returnResponseObject()
+            ->post();
+
+        return $results;
+    }
+
 }
